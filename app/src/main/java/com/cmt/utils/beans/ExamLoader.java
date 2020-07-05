@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.cmt.utils.RetrofitClient;
 import com.cmt.utils.api.Api;
+import com.cmt.utils.api.ApiUrl;
 import com.cmt.utils.loaders.BaseLoader;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public class ExamLoader extends BaseLoader {
         return examLoader;
     }
 
-    public ExamLoader(Context context){this.api = RetrofitClient.getInstance(context,Api.class); }
+    public ExamLoader(Context context){this.api = RetrofitClient.getInstance(context, ApiUrl.BASE_URL,Api.class); }
 
 
     public Observable<List<ExampleBean>> getFlist(String epid){
