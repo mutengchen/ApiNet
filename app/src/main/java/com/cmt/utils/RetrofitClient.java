@@ -2,8 +2,8 @@ package com.cmt.utils;
 
 import android.content.Context;
 
-import com.example.network.api.Api;
-import com.example.network.api.ApiUrl;
+
+import com.cmt.utils.api.ApiUrl;
 
 import java.util.HashMap;
 
@@ -21,21 +21,21 @@ public class RetrofitClient {
     public static HashMap<String,RetrofitClient> hashMap;
 
     //不需要证书
-    public static<T> T getInstance(Context context,Class<T> service){
+    public static<T> T getInstance(Context context,String api_host,Class<T> service){
         Retrofit retrofit = new Retrofit.Builder()
                 .client(OkHttpClient.getBuilder(context).build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl(ApiUrl.BASE_URL)
+                .baseUrl(api_host)
                 .build();
         return retrofit.create(service);
     }
 
     //okhttp携带证书
-    public static<T> T getInstance(Context context,Class<T> service,int cer_type){
+    public static<T> T getInstance(Context context,String api_host,Class<T> service,int cer_type){
         Retrofit retrofit = new Retrofit.Builder()
                 .client(OkHttpClient.getBuilder(context,cer_type).build())
-                .baseUrl(ApiUrl.BASE_URL)
+                .baseUrl(api_host)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
